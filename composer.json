@@ -3,6 +3,7 @@
   "description": "Nette Panel Callback",
   "minimum-stability": "stable",
   "license": "proprietary",
+  "version": "0.0.1",
   "authors": [
     {
       "name": "Pavol Bincik",
