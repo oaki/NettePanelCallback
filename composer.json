@@ -2,7 +2,7 @@
   "name": "oaki/nettepanelcallback",
   "description": "Nette Panel Callback",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "version": "0.0.1",
   "authors": [
     {
