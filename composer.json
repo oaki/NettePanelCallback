@@ -9,5 +9,8 @@
       "name": "Pavol Bincik",
       "email": "pavol@bincik.sk"
     }
-  ]
+  ],
+  "autoload": {
+    "classmap": ["Panel/CallbackPanel/src/"]
+  }
 }
