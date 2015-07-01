@@ -46,7 +46,7 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
     protected function initDefaultsCallbacks()
     {
         if ($this->container->hasService('cacheStorage')) {
-            $cacheStorage = $this->container->cacheStorage;
+            $cacheStorage = $this->container->getService('cacheStorage');
             $this->callbacks['cache'] = array(
                 'name' => 'Clean cache',
                 'callback' => function () use ($cacheStorage) {
@@ -56,7 +56,7 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
         }
 
         if ($this->container->hasService('session')) {
-            $session = $this->container->session;
+            $session = $this->container->getService('session');
             $this->callbacks['session'] = array(
                 'name' => 'Clean session',
                 'callback' => function () use ($session) {
@@ -81,7 +81,7 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
 
     protected function run()
     {
-        $httpRequest = $this->container->httpRequest;
+        $httpRequest = $this->container->getService('httpRequest');
         if ($httpRequest->getHeader(static::XHR_HEADER)) {
             $data = (array)json_decode(file_get_contents('php://input'), TRUE);
             foreach ($data as $key => $value) {
@@ -110,7 +110,7 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
     public function getPanel()
     {
         $callbacks = $this->callbacks;
-        $absoluteUrl = $this->container->httpRequest->url->absoluteUrl;
+        $absoluteUrl = $this->container->getService('httpRequest')->url->absoluteUrl;
         ob_start();
         require_once __DIR__ . "/templates/CallbackPanel.panel.phtml";
         return ob_get_clean();
