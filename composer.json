@@ -1,0 +1,12 @@
+{
+  "name": "oaki/nettepanel",
+  "description": "Nette Panel Callback",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Pavol Bincik",
+      "email": "pavol@bincik.sk"
+    }
+  ]
+}
