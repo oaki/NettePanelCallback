@@ -66,6 +66,16 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
                 }
             );
         }
+
+        if (isset($this->container->parameters['webimages'])) {
+            $conf = $this->container->parameters['webimages'];
+            $this->callbacks['tempimage'] = array(
+                'name' => 'Clean tempimage',
+                'callback' => function () use ($conf) {
+                    $this->clearDir($conf['tempDir']);
+                });
+        }
+
     }
 
     /**
@@ -74,7 +84,7 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
     protected function invoke($id)
     {
         if (isset($this->callbacks[$id]) && isset($this->callbacks[$id]['callback'])) {
-            callback($this->callbacks[$id]['callback'])->invoke();
+            $this->callbacks[$id]['callback']();
             die(json_encode(array('status' => "OK")));
         }
     }
@@ -124,6 +134,17 @@ final class CallbackPanel extends \Nette\Object implements IBarPanel
     {
         if (Debugger::getBar()) {
             Debugger::getBar()->addPanel(new static($container, $callbacks));
+        }
+    }
+
+    public function clearDir($dir)
+    {
+        foreach (glob($dir . "/*") as $path) {
+            if (is_dir($path)) {
+                $this->clearDir($path);
+                @rmdir($path);
+            } else
+                @unlink($path);
         }
     }
 }
