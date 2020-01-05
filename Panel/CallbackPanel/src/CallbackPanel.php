@@ -11,8 +11,11 @@ use Tracy\IBarPanel;
  *
  * @author    Patrik Votoček
  */
-final class CallbackPanel extends \Nette\Object implements IBarPanel
+class CallbackPanel implements IBarPanel
 {
+
+    use \Nette\SmartObject;
+
     const VERSION = "1.9",
         XHR_HEADER = "X-Nella-Callback-Panel";
 
